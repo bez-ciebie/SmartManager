@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         self.frame.setStyleSheet("")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
+        self.frame.setObjectName("QTframe")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(30, 30, 500, 71))
         font = QtGui.QFont()

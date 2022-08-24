@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 
 #import private
 from FileSort import FileSort
-from frame import helloworld
+from QTframe import helloworld
 from pdf2words import pdf2words
 
 # ******************************************************************************************
