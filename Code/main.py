@@ -11,16 +11,23 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 #import private
-from FileSort import FileSort
+from FileSort import FileSort, CreateFolder
 from QTframe import helloworld
 from pdf2words import pdf2words
-
+from pdfContentSearch import pdfFolderContentSearch
 # ******************************************************************************************
 
 
 if __name__ == '__main__':
-    folder_path = "C:\\Users\\ict-wzh\\Desktop"
-    FileSort(folder_path)
+    folder_path = "D:\\paper\\demo\\0074.pdf"
+    #FileSort(folder_path)
+    #list = pdfFolderContentSearch("bert", folder_path+"//WORD", 0)
+    list = pdfFolderContentSearch("bert", folder_path, 0)
+
+
+
+
+
 
 
 

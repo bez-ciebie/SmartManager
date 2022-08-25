@@ -14,16 +14,18 @@ from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
 import re
-
+from func_timeout import func_set_timeout
+import func_timeout
 # import private
 # **********************************************************
 
-# 获取文档对象
+# 获取文档对象,支持多栏论文解析
+#@func_set_timeout(30)#设定超时保护
 def pdf2words(pdf):
     fp=open(pdf,"rb")
     #创建一个与文档关联的解释器
     parser=PDFParser(fp)
-    #PDf文档的对象
+    #PDf文档的对象(本函数存在无法读取bug，造成卡死)
     doc=PDFDocument(parser)
     #链接解释器和文档对象
     parser.set_document(doc)
@@ -37,7 +39,6 @@ def pdf2words(pdf):
     interpreter=PDFPageInterpreter(resource,device)
     # 计数器
     passage = ''
-
     #使用文档对象得到页面的集合
     for page in PDFPage.create_pages(doc):
         #使用页面解释器来读取
@@ -49,7 +50,6 @@ def pdf2words(pdf):
             if hasattr(out, 'get_text'):  # 需要注意的是在PDF文档中不只有 text 还可能有图片等等，为了确保不出错先判断对象是否具有 get_text()方法完整的代码
                 #re函数可以分割多个字符,注意空格的个数
                 passage += out.get_text()
-
     # 使用正则表达式整理文章格式
     passage = re.sub(r'[^A-Za-z ]+', ' ', passage)
     passage = re.sub(r'/t+', ' ', passage)
@@ -57,4 +57,12 @@ def pdf2words(pdf):
     # 返回文章和总单词数
     return passage, len(passage.split(" "))
 
+if __name__ == '__main__':
+    Path = 'D:\\paper\\ijcai2021.pdf\\0081.pdf'
+    try:
+        article, count = pdf2words(Path)
+    except:
+        count,article=9999,"not found"
 
+    print(count,article)
+    #print( "这篇文章您最少要读：" + str(format(count / 150, '.2f')) + 'min')

@@ -11,7 +11,7 @@ import shutil
 
 # import private
 # **********************************************************
-# 2. 对文件中的后缀进行分类归档  word(txt pdf docx xlsx pptx md)       img(jpg png jpeg)
+# 2. 对文件中的后缀进行分类归档  word("txt", "pdf", "xlsx", "pptx", "md", "docx")       img("jpg", "jpeg", "png", "bmp", "gif")
 #       A.所有文件分类。遍历文件夹下文件名，查找后缀进行分类，将对应文件放到对应文件夹下。
 #       B.标记生成的文件夹。文件夹中生成一个目录文件，记录生成文件夹路径参数与文件信息。（所有生成的文件夹可以识别文件是否属于文件夹，并且有标记到独自的出入表中）
 #       C.依据出入表指针，在所有管理过的文件中实现快速智能查找。
@@ -41,6 +41,7 @@ def FileSort(folder_path):
         # 遍历文件列表，向文件夹拷贝文件
         for file in listOfFiles:
             if not os.path.exists(folder_path_word+'//'+file):
+                print(file + "已经移动到WORD")
                 shutil.move(file, folder_path_word)
                 print(file + "已经移动到WORD")  # Or do other stuff
     print("WORD停止传输")
